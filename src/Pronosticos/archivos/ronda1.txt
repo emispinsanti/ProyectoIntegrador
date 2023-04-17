@@ -1,2 +1,0 @@
-Boca,River,1,1
-Barcelona,Real Madrid,3,1
