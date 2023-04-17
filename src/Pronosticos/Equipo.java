@@ -1,10 +1,5 @@
 package Pronosticos;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
-
 public class Equipo {
 	// Constructor
 	public Equipo(String name, String desc) {

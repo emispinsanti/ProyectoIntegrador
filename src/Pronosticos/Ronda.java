@@ -7,11 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ronda {
-	// Constructor
-	public Ronda(int n) {
-		this.nro = n;
-	}
-
+	
 	// Variables
 	int nro;
 	ArrayList<Partido> partidos = new ArrayList<>();
@@ -25,30 +21,36 @@ public class Ronda {
 		this.nro = nro;
 	}
 
+	// Constructor
+		public Ronda(int n) {
+			this.nro = n;
+		}
+	
 	// Metodos
 	public ArrayList<Partido> leerArchivo(String archivo) {
-
+		
 		String equipo1, equipo2;
 		int golesEquipo1, golesEquipo2;
 		File file = new File(archivo);
-		
 		
 		try (Scanner fileScn = new Scanner(file, StandardCharsets.UTF_8)) {
 
 			while (fileScn.hasNextLine()) {
 
-				String[] vector = (fileScn.nextLine()).split(",");
+				String[] vector = (fileScn.nextLine()).split(";");
 				equipo1 = vector[0];
-				equipo2 = vector[1];
-				golesEquipo1 = Integer.parseInt(vector[2]);
-				golesEquipo2 = Integer.parseInt(vector[3]);
-
+				equipo2 = vector[3];
+				golesEquipo1 = Integer.parseInt(vector[1]);
+				golesEquipo2 = Integer.parseInt(vector[2]);
+				
+				Equipo Equipo11 = new Equipo (equipo1,equipo1);
+				Equipo Equipo22 = new Equipo (equipo2,equipo2);
+				
 				Partido partido = new Partido();
-				partido.nombreEq1 = equipo1;
-				partido.nombreEq2 = equipo2;
+				partido.Eq1 = Equipo11;
+				partido.Eq2 = Equipo22;
 				partido.golesEq1 = golesEquipo1;
 				partido.golesEq2 = golesEquipo2;
-				
 				partidos.add(partido);
 
 			}
@@ -61,11 +63,4 @@ public class Ronda {
 		return partidos;
 	}
 	
-	//Falto este metodo que hay que sumar puntos por cada acierto
-	// tengo que esperar este terminada la clase Pronostico por que 
-	//Depende de ella
-	public int puntos() {
-		return 0;
-	}
-
 }

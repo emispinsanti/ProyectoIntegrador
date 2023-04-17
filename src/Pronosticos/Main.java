@@ -1,42 +1,43 @@
 package Pronosticos;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
 		Ronda ronda = new Ronda(1);	
 		
+		String archRonda1 = "C:\\Users\\Emi\\git\\proyectoIntegrador\\src\\Pronosticos\\archivos\\resultados.csv";
 		
+		ArrayList<Partido> partidos1 = ronda.leerArchivo(archRonda1);
 		
+		Pronostico pronosticos = new Pronostico ();
 		
-		System.out.println("Leyendo archivo de resultados de la ronda "+ ronda.nro);
+		String archPronostico1 = "C:\\Users\\Emi\\git\\proyectoIntegrador\\src\\Pronosticos\\archivos\\pronostico.csv";
+
+		ArrayList<Partido> pronosticos1 = pronosticos.leerArchivo_usuario(archPronostico1);
 		
-		System.out.println("\n*******************\n");
+		boolean acierto = false;
 		
-		String archRonda1 = "C:\\\\Users\\\\Matias\\\\eclipse-workspace\\\\Integrador\\\\PronosticosDeportivos\\\\src\\\\Pronosticos\\\\archivos\\\\ronda1.txt";
+		System.out.println("Resultados Ronda " + ronda.nro + ": ");
 		
-		ArrayList<Partido> partidos = ronda.leerArchivo(archRonda1);
-		
-		System.out.println("Resuldados ronda " + ronda.nro + ": ");
-		
-		for (Partido partido : partidos) {
-			System.out.println("\n" + partido.golesEq1 +  " " + partido.nombreEq1 + " - " + partido.nombreEq2 + " " + partido.golesEq2);
 			
-			//PROBANDO SI ANDABA LA FUNCION ResultadoEnum
-			//Equipo equipo = new Equipo(partido.nombreEq1,"Xeneixe");
-			//System.out.println(partido.resuldato(equipo));
+		for (int i=0; i< partidos1.size(); i++) {
+			System.out.println("\n" + partidos1.get(i).getEq1() +  " " + partidos1.get(i).getGolesEq1() + " - " + partidos1.get(i).getEq2() + " " + partidos1.get(i).getGolesEq2());
+			System.out.println("El usuario pronostico que " + pronosticos1.get(i).Eq1.nombre + " seria " + pronosticos1.get(i).resultado);
+			System.out.println("El equipo salio " + partidos1.get(i).resultado(pronosticos1.get(i).Eq1));
+			
+			if (pronosticos1.get(i).resultado == partidos1.get(i).resultado(pronosticos1.get(i).Eq1)) {
+				acierto = true;
+			} else {
+				acierto = false;
+			}
+			
+			System.out.println("Puntaje: " + pronosticos.puntos(acierto));
 		}
 		
-		
-		String archPronostico1 = "C:\\\\Users\\\\Matias\\\\eclipse-workspace\\\\PronosticosDeportivos\\\\src\\\\Pronosticos\\\\archivos\\\\pronosticoUser1.txt";
-
-		
-	
+		System.out.println("\n*******************");
+		System.out.println("Puntaje total: " + pronosticos.puntos_usuario);
 	}
 
 }
